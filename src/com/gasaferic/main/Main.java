@@ -150,7 +150,7 @@ public class Main extends JavaPlugin implements Listener {
 
 		PluginDescriptionFile pdfFile = getDescription();
 
-		registerConfig();
+		reloadConfig();
 
 		try {
 			mySQL = new MySQL(getConfig().getString("MySQL.address"), getConfig().getString("MySQL.database"),
@@ -225,6 +225,8 @@ public class Main extends JavaPlugin implements Listener {
 			saveGenBlocks();
 
 			storeShelters();
+			
+			saveConfig();
 
 		}
 
@@ -473,10 +475,6 @@ public class Main extends JavaPlugin implements Listener {
 
 	public String getPrefixString(String string) {
 		return ChatColor.translateAlternateColorCodes('&', getConfig().getString(string));
-	}
-
-	public void registerConfig() {
-		saveDefaultConfig();
 	}
 
 	public static Location fromString(String loc) {
