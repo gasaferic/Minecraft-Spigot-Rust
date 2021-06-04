@@ -5,11 +5,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import com.gasaferic.areaprotection.managers.AreaManager;
+import com.gasaferic.areaprotection.model.Area;
 import com.gasaferic.main.Main;
 import com.gasaferic.managers.SurvivorManager;
 import com.gasaferic.model.Survivor;
 
 public class TeamHit implements Listener {
+	
+	private AreaManager areaManager = Main.getAreaManager();
 
 	private Main plugin = Main.getInstance();
 	
@@ -30,7 +34,9 @@ public class TeamHit implements Listener {
 					Player damaged = (Player) event.getEntity();
 					Survivor survivorDamaged = survivorManager.getSurvivorByPlayer(damaged);
 
-					if (!(TeamArrow.isRegionProtected(damager.getLocation(), plugin))) {
+					Area area = areaManager.getAreaFromName("Safezone");
+					
+					if (!(area.inArea(damager.getLocation()))) {
 						TeamMethod teammethod = new TeamMethod();
 						if (teammethod.isTeam(survivorDamager, survivorDamaged, plugin)) {
 							event.setCancelled(true);
@@ -39,7 +45,7 @@ public class TeamHit implements Listener {
 							teammethod.combatLog(survivorDamager, survivorDamaged, plugin);
 							event.setCancelled(false);
 						}
-					} else if (TeamArrow.isRegionProtected(damager.getLocation(), plugin)) {
+					} else if (area.inArea(damager.getLocation())) {
 						damager.sendMessage(prefix + plugin.getConfig().getString("canthitsafezone" + survivorDamager.getLanguage().getLang()));
 						event.setCancelled(true);
 					}

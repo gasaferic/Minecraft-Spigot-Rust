@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="/Users/gabry/Documents/Server Rust FusionCraft/plugins/CrackShot.jar"/>
-	<classpathentry kind="lib" path="/Users/gabry/Documents/Server Rust FusionCraft/plugins/WGRegionEvents.jar"/>
-	<classpathentry kind="lib" path="/Users/gabry/Documents/Server Rust FusionCraft/plugins/worldedit-bukkit-6.1.jar"/>
-	<classpathentry kind="lib" path="/Users/gabry/Documents/Server Rust FusionCraft/plugins/worldguard-6.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="/Users/gabry/spigot-1.8.8.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/gabrielealoise/Downloads/spigot-1.8.8.jar"/>
+	<classpathentry kind="lib" path="/Users/gabrielealoise/Documents/Server Rust/plugins/AreaProtection.jar"/>
+	<classpathentry kind="lib" path="/Users/gabrielealoise/Documents/Server Rust/plugins/CrackShot.jar"/>
+	<classpathentry kind="lib" path="/Users/gabrielealoise/Documents/Server Rust/plugins/worldedit-bukkit-6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

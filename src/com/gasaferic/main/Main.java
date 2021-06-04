@@ -26,12 +26,13 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent.Result;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.gasaferic.areaprotection.api.AreaProtectionAPI;
+import com.gasaferic.areaprotection.managers.AreaManager;
 import com.gasaferic.commands.AddRadzone;
 import com.gasaferic.commands.Reboot;
 import com.gasaferic.commands.ReloadConfig;
@@ -115,7 +116,6 @@ import com.gasaferic.model.Survivor;
 import com.gasaferic.resourcespawner.ResourceSpawner;
 import com.gasaferic.resourcespawner.ResourceSpawnerUtils;
 import com.gasaferic.resourcespawner.ResourceTreeSpawner;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import net.minecraft.server.v1_8_R3.GenericAttributes;
 
@@ -138,6 +138,7 @@ public class Main extends JavaPlugin implements Listener {
 	private static PlayersRegionManager playersRegionManager;
 	private static AirDropManager airDropManager;
 	private static RadChestManager radChestManager;
+	private static AreaProtectionAPI areaProtectionAPI;
 
 	Connection connection;
 	String host, database, username, password;
@@ -174,6 +175,7 @@ public class Main extends JavaPlugin implements Listener {
 			teamManager = new TeamManager();
 			shelterManager = new ShelterManager();
 			metadataManager = new MetadataManager();
+			areaProtectionAPI = new AreaProtectionAPI();
 			playersRegionManager = new PlayersRegionManager();
 
 			getServer().addRecipe(new FurnaceRecipe(new ItemStack(Material.IRON_INGOT, 1), Material.BOWL));
@@ -354,6 +356,14 @@ public class Main extends JavaPlugin implements Listener {
 		return shelterManager;
 	}
 
+	public static AreaProtectionAPI getAreaProtectionAPI() {
+		return areaProtectionAPI;
+	}
+
+	public static AreaManager getAreaManager() {
+		return areaProtectionAPI.getAreaManager();
+	}
+
 	public static PlayersRegionManager getPlayersRegionManager() {
 		return playersRegionManager;
 	}
@@ -485,17 +495,6 @@ public class Main extends JavaPlugin implements Listener {
 		String yaw = loc.substring(loc.indexOf("=") + 1, loc.indexOf("}"));
 		return new Location(Bukkit.getWorld(worldName), Double.parseDouble(xCoord), Double.parseDouble(yCoord),
 				Double.parseDouble(zCoord), Float.parseFloat(yaw), Float.parseFloat(pitch));
-	}
-
-	public WorldGuardPlugin getWorldGuard() {
-		Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
-
-		// WorldGuard may not be loaded
-		if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {
-			return null; // Maybe you want throw an exception instead
-		}
-
-		return (WorldGuardPlugin) plugin;
 	}
 
 	public void prepareRust() {

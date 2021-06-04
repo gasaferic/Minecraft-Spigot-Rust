@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -17,13 +16,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.gasaferic.areaprotection.events.AreaEnterEvent;
+import com.gasaferic.areaprotection.events.AreaLeaveEvent;
+import com.gasaferic.areaprotection.model.Area;
 import com.gasaferic.main.Main;
-import com.mewin.WGRegionEvents.events.RegionEnterEvent;
-import com.mewin.WGRegionEvents.events.RegionLeaveEvent;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
-import com.sk89q.worldguard.protection.managers.RegionManager;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RadiazioniEvent implements Listener {
 
@@ -32,9 +28,9 @@ public class RadiazioniEvent implements Listener {
 	private Main plugin = Main.getInstance();
 
 	@EventHandler
-	public void onRegionEnter(RegionEnterEvent e) {
+	public void onRegionEnter(AreaEnterEvent e) {
 		Player player = e.getPlayer();
-		if (isRadzoneRegion(e.getRegion(), plugin)) {
+		if (isRadzoneArea(e.getArea(), plugin)) {
 			if (!hasAntiRad(player)) {
 				if (!(radiazioni.containsKey(player))) {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 100000, 2));
@@ -45,9 +41,9 @@ public class RadiazioniEvent implements Listener {
 	}
 
 	@EventHandler
-	public void onRegionLeave(RegionLeaveEvent e) {
+	public void onRegionLeave(AreaLeaveEvent e) {
 		Player player = e.getPlayer();
-		if (isRadzoneRegion(e.getRegion(), plugin)) {
+		if (isRadzoneArea(e.getArea(), plugin)) {
 			if (radiazioni.containsKey(player)) {
 				Bukkit.getScheduler().cancelTask((radiazioni.get(player)));
 				radiazioni.remove(player);
@@ -65,7 +61,7 @@ public class RadiazioniEvent implements Listener {
 					|| armorPiece.getType().equals(Material.GOLD_CHESTPLATE)
 					|| armorPiece.getType().equals(Material.GOLD_LEGGINGS)
 					|| armorPiece.getType().equals(Material.GOLD_BOOTS)) {
-				if (isRadzoneProtected(player.getLocation(), plugin, player)) {
+				if (isRadzoneArea(Main.getAreaProtectionAPI().getAreaByLocation(player.getLocation()), plugin)) {
 					if (hasAntiRad(player)) {
 						if (radiazioni.containsKey(player)) {
 							Bukkit.getScheduler().cancelTask((radiazioni.get(player)));
@@ -83,7 +79,7 @@ public class RadiazioniEvent implements Listener {
 
 					@Override
 					public void run() {
-						if (isRadzoneProtected(player.getLocation(), plugin, player)) {
+						if (isRadzoneArea(Main.getAreaProtectionAPI().getAreaByLocation(player.getLocation()), plugin)) {
 							if (!hasAntiRad(player)) {
 								if (!(radiazioni.containsKey(player))) {
 									player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 100000, 2));
@@ -137,29 +133,13 @@ public class RadiazioniEvent implements Listener {
 
 	}
 
-	public static boolean isRadzoneProtected(Location location, Main plugin, Player player) {
-		WorldGuardPlugin worldGuard = plugin.getWorldGuard();
-		RegionManager regionManager = worldGuard.getRegionManager(location.getWorld());
-		ApplicableRegionSet regions = regionManager.getApplicableRegions(location);
-		if (regions.size() == 0) {
+	public static boolean isRadzoneArea(Area area, Main plugin) {
+		if (area == null) {
 			return false;
-		} else {
-			for (ProtectedRegion region : regions) {
-				for (String stringregion : plugin.getConfig().getStringList("RegionsRad")) {
-					if (region.getId().equalsIgnoreCase(stringregion)) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-			}
 		}
-		return false;
-	}
 
-	public static boolean isRadzoneRegion(ProtectedRegion region, Main plugin) {
-		for (String stringregion : plugin.getConfig().getStringList("RegionsRad")) {
-			if (region.getId().equalsIgnoreCase(stringregion)) {
+		for (String radzoneAreaString : plugin.getConfig().getStringList("RegionsRad")) {
+			if (area.getAreaName().equalsIgnoreCase(radzoneAreaString)) {
 				return true;
 			} else {
 				return false;

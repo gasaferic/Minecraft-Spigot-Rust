@@ -5,11 +5,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 
+import com.gasaferic.areaprotection.managers.AreaManager;
+import com.gasaferic.areaprotection.model.Area;
 import com.gasaferic.main.Main;
 
 public class AntiBreakDoors implements Listener {
 
-	private static Main plugin = Main.getInstance();
+	private AreaManager areaManager = Main.getAreaManager();
 
 	@EventHandler
 	public void onBuildOutside(BlockBreakEvent event) {
@@ -18,10 +20,13 @@ public class AntiBreakDoors implements Listener {
 
 		if (BlockUtils.isSecurity(block)) {
 			if (!event.getPlayer().hasPermission("rust.admin")) {
-				if (AntiBuildDoors.isRegionOwner(block.getLocation(), plugin, event.getPlayer())) {
-					event.setCancelled(false);
-				} else if (!AntiBuildDoors.isRegionOwner(block.getLocation(), plugin, event.getPlayer())) {
-					event.setCancelled(true);
+				Area area;
+				if ((area = areaManager.getAreaByLocation(block.getLocation())) != null) {
+					if (area.isAreaOwner(event.getPlayer())) {
+						event.setCancelled(false);
+					} else if (!area.isAreaOwner(event.getPlayer())) {
+						event.setCancelled(true);
+					}
 				}
 			} else if (!event.getPlayer().hasPermission("rust.admin")) {
 				event.setCancelled(false);

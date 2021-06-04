@@ -9,7 +9,7 @@ public enum LootsPercentuage {
 // Well maybe not, because it is a enum. For enums I always make a seperate enum package, but thsatti'sl just my personal preferance well still data
 	AIR(Material.AIR, 1, 75.0, false),
 	// Saccheggio
-	CHIAVE(Material.TRIPWIRE_HOOK, 1, 0.001, false), TNT(Material.TNT, 1, 0.1, false), ASCIA(Material.IRON_AXE, 1, 1, false),
+	CHIAVE(Material.TRIPWIRE_HOOK, 1, 1, false), TNT(Material.TNT, 1, 1, false), ASCIA(Material.IRON_AXE, 1, 1, false),
 	DINAMITE(Material.BLAZE_ROD, 1, 1, false),
 	// Armatura
 	ELMO_KEVLAR(Material.DIAMOND_HELMET, 1, 20, false), CORAZZA_KEVLAR(Material.DIAMOND_CHESTPLATE, 1, 10, false),
@@ -37,7 +37,7 @@ public enum LootsPercentuage {
 	// Rifugio
 	CHEST(Material.CHEST, 1, 65, false), WORKBENCH(Material.WORKBENCH, 1, 70, false),
 	FURNACE(Material.FURNACE, 1, 65, false), TORCH(Material.TORCH, 65, false, true),
-	IRONDOOR(Material.IRON_DOOR, 1, 55, false), WOODENDOOR(Material.WOODEN_DOOR, 1, 60, false),
+	IRONDOOR(Material.IRON_DOOR, 1, 55, false), WOODENDOOR(Material.WOOD_DOOR, 1, 60, false),
 	IRONTRAPDOOR(Material.IRON_TRAPDOOR, 1, 60, false), WOODENTRAPDOOR(Material.TRAP_DOOR, 1, 65, false),
 	SPIKES(Material.WEB, 1, 65, false),
 	// Progetti
@@ -70,7 +70,7 @@ public enum LootsPercentuage {
 	private boolean unbreakable;
 	private boolean ammo;
 	
-	public static ProbabilityUntilities prob = new ProbabilityUntilities();
+	public static ProbabilityUtilities prob = new ProbabilityUtilities();
 
 	LootsPercentuage(Material material, String name, int ammount, double percentuage, boolean schematic,
 			boolean unbreakable) {
@@ -142,7 +142,7 @@ public enum LootsPercentuage {
 	}
 
 	public static void addLoot(Material material, String name, int ammount, double percentuage, boolean schematic,
-			boolean unbreakable, ProbabilityUntilities prob) {
+			boolean unbreakable, ProbabilityUtilities prob) {
 		ItemStack item = new ItemStack(material, ammount);
 		if (item != null) {
 			ItemMeta itemMeta = item.getItemMeta();
@@ -156,7 +156,7 @@ public enum LootsPercentuage {
 		}
 	}
 
-	public static void addLoot(Material material, int ammount, double percentuage, boolean unbreakable, ProbabilityUntilities prob) {
+	public static void addLoot(Material material, int ammount, double percentuage, boolean unbreakable, ProbabilityUtilities prob) {
 		ItemStack item = new ItemStack(material, ammount);
 		if (item != null) {
 			ItemMeta itemMeta = item.getItemMeta();
@@ -168,7 +168,7 @@ public enum LootsPercentuage {
 		}
 	}
 
-	public static void addLoot(Material material, double percentuage, boolean unbreakable, ProbabilityUntilities prob) {
+	public static void addLoot(Material material, double percentuage, boolean unbreakable, ProbabilityUtilities prob) {
 
 		ItemStack item = new ItemStack(material, 3);
 		if (item != null) {

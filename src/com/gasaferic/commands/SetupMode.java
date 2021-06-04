@@ -28,7 +28,7 @@ public class SetupMode implements CommandExecutor, Listener {
 		Player player = (Player) sender;
 
 		Survivor survivor = Main.getSurvivorManager().getSurvivorByPlayer(player);
-
+		
 		boolean setupModeEnabled = survivor.setupModeEnabled();
 		String message = "§6Modalità Setup " + (!setupModeEnabled ? "abilitata" : "disabilitata");
 

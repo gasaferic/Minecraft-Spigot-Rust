@@ -8,21 +8,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.gasaferic.areaprotection.managers.AreaManager;
 import com.gasaferic.main.Main;
 import com.gasaferic.main.Schematic;
 import com.gasaferic.managers.ShelterManager;
 import com.gasaferic.managers.SurvivorManager;
 import com.gasaferic.model.Shelter;
 import com.gasaferic.model.Survivor;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.managers.RegionManager;
 
 public class AbbandonaRifugio implements Listener {
 
 	private SurvivorManager survivorManager = Main.getSurvivorManager();
 	private ShelterManager shelterManager = Main.getShelterManager();
-
-	private Main plugin = Main.getInstance();
+	private AreaManager areaManager = Main.getAreaManager();
 
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent event) {
@@ -42,10 +40,7 @@ public class AbbandonaRifugio implements Listener {
 			if (event.getInventory().getName().equals("§7§lConferma Abbandono")) {
 				if (clicked.getItemMeta().getDisplayName().equals("§a§lConferma")) {
 
-					WorldGuardPlugin wg = plugin.getWorldGuard();
-					RegionManager rm = wg.getRegionManager(player.getWorld());
-
-					rm.removeRegion("Casa" + player.getName());
+					areaManager.unregisterArea(areaManager.getAreaFromName("Casa" + player.getName()));
 					
 					Location pastingLocation = playerShelter.getConsoleBlock().getLocation();
 					
@@ -60,10 +55,7 @@ public class AbbandonaRifugio implements Listener {
 			} else if (event.getInventory().getName().equals("§7§lConfirm")) {
 				if (clicked.getItemMeta().getDisplayName().equals("§a§lConfirm")) {
 
-					WorldGuardPlugin wg = plugin.getWorldGuard();
-					RegionManager rm = wg.getRegionManager(player.getWorld());
-
-					rm.removeRegion("Casa" + player.getName());
+					areaManager.unregisterArea(areaManager.getAreaFromName("Casa" + player.getName()));
 					
 					Location pastingLocation = playerShelter.getConsoleBlock().getLocation();
 

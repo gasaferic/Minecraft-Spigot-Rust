@@ -53,7 +53,7 @@ bear_spawners_respawn_time: 10
 mutant_spawners_respawn_time: 10
 radiozombie_spawners_respawn_time: 10
 hog_spawners_respawn_time: 10
-aidrop_regen_time: 10
+airdrop_regen_time: 10
 radchest_regen_time: 10
 MySQL:
   address: localhost

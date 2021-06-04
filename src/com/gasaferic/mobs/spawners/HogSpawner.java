@@ -33,11 +33,8 @@ public class HogSpawner implements Listener {
 	public void onBearDeath(EntityDeathEvent e) {
 		if (e.getEntity() instanceof Pig) {
 			if (e.getEntity().hasMetadata("spawnLoc")) {
-				e.getDrops().clear();
 				e.getEntity().getLocation().getWorld().dropItem(e.getEntity().getLocation(),
 						new ItemStack(Material.FERMENTED_SPIDER_EYE, new Random().nextInt(3)));
-				e.getEntity().getLocation().getWorld().dropItem(e.getEntity().getLocation(),
-						new ItemStack(Material.PORK, new Random().nextInt(3)));
 				new BukkitRunnable() {
 					@Override
 					public void run() {

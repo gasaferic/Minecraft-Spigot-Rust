@@ -9,32 +9,39 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import com.gasaferic.areaprotection.managers.AreaManager;
+import com.gasaferic.areaprotection.model.Area;
 import com.gasaferic.main.Main;
 
 public class DoorPlaceEvents implements Listener {
 
-	private static Main plugin = Main.getInstance();
+	private AreaManager areaManager = Main.getAreaManager();
 
 	@EventHandler
 	public void onPlaceIronDoor(BlockPlaceEvent e) {
 		Player player = e.getPlayer();
-		if (AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
-			if ((e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.GRASS
-					|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.DIRT
-					|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.STONE)) {
-				if (e.getBlockPlaced().getType() == Material.IRON_DOOR_BLOCK) {
-					Block b = e.getBlockPlaced().getRelative(BlockFace.UP);
-					Main.getMetadataManager().saveDoor(e.getBlock(), e.getPlayer());
-					Main.getMetadataManager().saveDoor(b, e.getPlayer());
-				} else if (!AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
-					if ((e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.GRASS
-							|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.DIRT
-							|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.STONE)) {
-						e.setCancelled(true);
+		Area area;
+
+		if ((area = areaManager.getAreaByLocation(e.getBlock().getLocation())) != null) {
+			if (area.isAreaOwner(player)) {
+				if ((e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.GRASS
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.DIRT
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.STONE)) {
+					if (e.getBlockPlaced().getType() == Material.IRON_DOOR_BLOCK) {
+						Block b = e.getBlockPlaced().getRelative(BlockFace.UP);
+						Main.getMetadataManager().saveDoor(e.getBlock(), e.getPlayer());
+						Main.getMetadataManager().saveDoor(b, e.getPlayer());
 					}
+				}
+			} else if (!area.isAreaOwner(player)) {
+				if ((e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.GRASS
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.DIRT
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.STONE)) {
+					e.setCancelled(true);
 				}
 			}
 		}
+
 	}
 
 	@EventHandler
@@ -63,23 +70,28 @@ public class DoorPlaceEvents implements Listener {
 	@EventHandler
 	public void onPlaceWoodDoor(BlockPlaceEvent e) {
 		Player player = e.getPlayer();
-		if (AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
-			if ((e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.GRASS
-					|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.DIRT
-					|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.STONE)) {
-				if (e.getBlockPlaced().getType() == Material.WOODEN_DOOR) {
-					Block b = e.getBlockPlaced().getRelative(BlockFace.UP);
-					Main.getMetadataManager().saveDoor(e.getBlock(), e.getPlayer());
-					Main.getMetadataManager().saveDoor(b, e.getPlayer());
-				} else if (!AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
-					if ((e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.GRASS
-							|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.DIRT
-							|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.STONE)) {
-						e.setCancelled(true);
+		Area area;
+
+		if ((area = areaManager.getAreaByLocation(e.getBlock().getLocation())) != null) {
+			if (area.isAreaOwner(player)) {
+				if ((e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.GRASS
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.DIRT
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.STONE)) {
+					if (e.getBlockPlaced().getType() == Material.WOODEN_DOOR) {
+						Block b = e.getBlockPlaced().getRelative(BlockFace.UP);
+						Main.getMetadataManager().saveDoor(e.getBlock(), e.getPlayer());
+						Main.getMetadataManager().saveDoor(b, e.getPlayer());
 					}
+				}
+			} else if (!area.isAreaOwner(player)) {
+				if ((e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.GRASS
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.DIRT
+						|| e.getBlock().getRelative(BlockFace.DOWN).getType() == Material.STONE)) {
+					e.setCancelled(true);
 				}
 			}
 		}
+
 	}
 
 	@EventHandler
@@ -108,10 +120,14 @@ public class DoorPlaceEvents implements Listener {
 	@EventHandler
 	public void onPlaceIronTrapDoor(BlockPlaceEvent e) {
 		Player player = e.getPlayer();
-		if (AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
-			if (e.getBlockPlaced().getType() == Material.IRON_TRAPDOOR) {
-				Main.getMetadataManager().saveTrapdoor(e.getBlock(), e.getPlayer());
-			} else if (!AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
+		Area area;
+
+		if ((area = areaManager.getAreaByLocation(e.getBlock().getLocation())) != null) {
+			if (area.isAreaOwner(player)) {
+				if (e.getBlockPlaced().getType() == Material.IRON_TRAPDOOR) {
+					Main.getMetadataManager().saveTrapdoor(e.getBlock(), e.getPlayer());
+				}
+			} else if (!area.isAreaOwner(player)) {
 				e.setCancelled(true);
 			}
 		}
@@ -132,13 +148,19 @@ public class DoorPlaceEvents implements Listener {
 	@EventHandler
 	public void onPlaceWoodTrapDoor(BlockPlaceEvent e) {
 		Player player = e.getPlayer();
-		if (AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
-			if (e.getBlockPlaced().getType() == Material.TRAP_DOOR) {
-				Main.getMetadataManager().saveTrapdoor(e.getBlock(), e.getPlayer());
-			} else if (!AntiBuildDoors.isRegionOwner(e.getBlock().getLocation(), plugin, player)) {
+
+		Area area;
+
+		if ((area = areaManager.getAreaByLocation(e.getBlock().getLocation())) != null) {
+			if (area.isAreaOwner(player)) {
+				if (e.getBlockPlaced().getType() == Material.TRAP_DOOR) {
+					Main.getMetadataManager().saveTrapdoor(e.getBlock(), e.getPlayer());
+				}
+			} else if (!area.isAreaOwner(player)) {
 				e.setCancelled(true);
 			}
 		}
+		
 	}
 
 	@EventHandler

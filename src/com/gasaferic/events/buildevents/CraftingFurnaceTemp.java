@@ -8,11 +8,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
+import com.gasaferic.areaprotection.managers.AreaManager;
 import com.gasaferic.main.Main;
 import com.sk89q.worldedit.BlockVector;
 
 public class CraftingFurnaceTemp implements Listener {
 
+	private AreaManager areaManager = Main.getAreaManager();
+	
 	private static Main plugin = Main.getInstance();
 
 	private String prefix = plugin.getPrefixString("prefix");
@@ -22,7 +25,7 @@ public class CraftingFurnaceTemp implements Listener {
 		Block block = e.getBlock();
 		Location location = block.getLocation();
 		if (block.getType() == Material.WORKBENCH) {
-			if (!(Main.getPlayersRegionManager().isRegionProtected(location, plugin))) {
+			if (!(areaManager.isAreaProtected(location))) {
 				e.getPlayer().sendMessage(prefix + "§6Questa crafting verrà rimossa tra 5 minuti.");
 				Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 					public void run() {
@@ -40,7 +43,7 @@ public class CraftingFurnaceTemp implements Listener {
 		Block block = e.getBlock();
 		Location location = block.getLocation();
 		if (block.getType() == Material.FURNACE) {
-			if (!(Main.getPlayersRegionManager().isRegionProtected(location, plugin))) {
+			if (!(areaManager.isAreaProtected(location))) {
 				e.getPlayer().sendMessage(prefix + "§6Questa fornace verrà rimossa tra 5 minuti.");
 				Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 					public void run() {
@@ -58,7 +61,7 @@ public class CraftingFurnaceTemp implements Listener {
 		Block block = e.getBlock();
 		Location location = block.getLocation();
 		if (block.getType() == Material.TORCH) {
-			if (!(Main.getPlayersRegionManager().isRegionProtected(location, plugin))) {
+			if (!(areaManager.isAreaProtected(location))) {
 				if (!e.getPlayer().isOp()) {
 					e.getPlayer().sendMessage(prefix + "§6Questa torcia verrà rimossa tra 5 minuti.");
 					Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
@@ -78,7 +81,7 @@ public class CraftingFurnaceTemp implements Listener {
 		Block block = e.getBlock();
 		Location location = block.getLocation();
 		if (block.getType() == Material.BED_BLOCK) {
-			if (!(Main.getPlayersRegionManager().isRegionProtected(location, plugin))) {
+			if (!(areaManager.isAreaProtected(location))) {
 				e.getPlayer().sendMessage(prefix + "§6Questo letto verrà rimosso tra 5 minuti.");
 				Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 					public void run() {
