@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import com.gasaferic.areaprotection.managers.AreaManager;
 import com.gasaferic.main.Main;
@@ -41,8 +42,8 @@ public class AbbandonaRifugio implements Listener {
 				if (clicked.getItemMeta().getDisplayName().equals("§a§lConferma")) {
 
 					areaManager.unregisterArea(areaManager.getAreaFromName("Casa" + player.getName()));
-					
-					Location pastingLocation = playerShelter.getConsoleBlock().getLocation();
+
+					Location pastingLocation = playerShelter.getConsoleBlock().getLocation().clone().add(new Vector(0, 1, 3));
 					
 					shelterManager.deleteShelter(survivor);
 					
@@ -56,8 +57,8 @@ public class AbbandonaRifugio implements Listener {
 				if (clicked.getItemMeta().getDisplayName().equals("§a§lConfirm")) {
 
 					areaManager.unregisterArea(areaManager.getAreaFromName("Casa" + player.getName()));
-					
-					Location pastingLocation = playerShelter.getConsoleBlock().getLocation();
+
+					Location pastingLocation = playerShelter.getConsoleBlock().getLocation().clone().add(new Vector(0, 1, 3));
 
 					shelterManager.deleteShelter(survivor);
 
