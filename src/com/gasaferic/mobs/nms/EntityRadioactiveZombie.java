@@ -48,6 +48,7 @@ public class EntityRadioactiveZombie extends EntityZombie {
 		this.getBukkitEntity().setCustomNameVisible(true);
 		
 		this.n();
+		
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
