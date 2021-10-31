@@ -46,7 +46,7 @@ public class OpenIronDoor implements Listener {
 
 							Team team = shelterManager
 									.getShelter(survivorManager
-											.getSurvivorByUUID(metadataManager.getBlockOwner(e.getClickedBlock())))
+											.getSurvivorByUniqueId(metadataManager.getBlockOwner(e.getClickedBlock())))
 									.getTeam();
 
 							BlockState state = b.getState();
@@ -96,7 +96,7 @@ public class OpenIronDoor implements Listener {
 
 							Team team = shelterManager
 									.getShelter(survivorManager
-											.getSurvivorByUUID(metadataManager.getBlockOwner(e.getClickedBlock())))
+											.getSurvivorByUniqueId(metadataManager.getBlockOwner(e.getClickedBlock())))
 									.getTeam();
 
 							BlockState state = b.getRelative(BlockFace.DOWN).getState();

@@ -43,7 +43,7 @@ public class Raid implements Listener {
 
 						Team team = shelterManager
 								.getShelter(survivorManager
-										.getSurvivorByUUID(metadataManager.getBlockOwner(event.getClickedBlock())))
+										.getSurvivorByUniqueId(metadataManager.getBlockOwner(event.getClickedBlock())))
 								.getTeam();
 
 						raidDoor(player, event.getClickedBlock(), player.getLocation().getX(),
@@ -64,7 +64,7 @@ public class Raid implements Listener {
 
 						Team team = shelterManager
 								.getShelter(survivorManager
-										.getSurvivorByUUID(metadataManager.getBlockOwner(event.getClickedBlock())))
+										.getSurvivorByUniqueId(metadataManager.getBlockOwner(event.getClickedBlock())))
 								.getTeam();
 
 						raidDoor(player, event.getClickedBlock(), player.getLocation().getX(),
@@ -85,7 +85,7 @@ public class Raid implements Listener {
 
 						Team team = shelterManager
 								.getShelter(survivorManager
-										.getSurvivorByUUID(metadataManager.getBlockOwner(event.getClickedBlock())))
+										.getSurvivorByUniqueId(metadataManager.getBlockOwner(event.getClickedBlock())))
 								.getTeam();
 
 						raidWoodDoor(player, event.getClickedBlock(), player.getLocation().getX(),
@@ -110,7 +110,7 @@ public class Raid implements Listener {
 
 						Team team = shelterManager
 								.getShelter(survivorManager
-										.getSurvivorByUUID(metadataManager.getBlockOwner(event.getClickedBlock())))
+										.getSurvivorByUniqueId(metadataManager.getBlockOwner(event.getClickedBlock())))
 								.getTeam();
 
 						Block block = event.getClickedBlock();
@@ -150,7 +150,7 @@ public class Raid implements Listener {
 
 						Team team = shelterManager
 								.getShelter(survivorManager
-										.getSurvivorByUUID(metadataManager.getBlockOwner(event.getClickedBlock())))
+										.getSurvivorByUniqueId(metadataManager.getBlockOwner(event.getClickedBlock())))
 								.getTeam();
 
 						Block block = event.getClickedBlock();

@@ -15,31 +15,28 @@ public class PlayerSurvivorRegistering implements Listener {
 
 	SurvivorManager survivorManager = Main.getSurvivorManager();
 	MySQL mySQL = Main.getMySQL();
-	
+
 	@EventHandler
 	public void onJoinRegister(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-		
-		if (survivorManager.survivorAlreadyExists(player)) {
-			Survivor survivor = survivorManager.getSurvivorByOfflinePlayer(player);
-			if (survivor.getPlayer() == null) {
-				survivor.setPlayer(player);
-			}
+		if (survivorManager.survivorAlreadyExists(player.getUniqueId())) {
+			Survivor survivor = survivorManager.getSurvivorByUniqueId(player.getUniqueId());
+			survivor.setPlayer(player);
 		} else {
 			Survivor survivor = new Survivor(player);
 			mySQL.addSurvivor(survivor);
 		}
 	}
-	
+
 	@EventHandler
 	public void onLeftDisable(PlayerQuitEvent e) {
 		Player player = e.getPlayer();
-		
+
 		Survivor survivor = survivorManager.getSurvivorByPlayer(player);
-		
+
 		if (survivor.setupModeEnabled()) {
 			survivor.toggleSetupMode();
 		}
 	}
-	
+
 }

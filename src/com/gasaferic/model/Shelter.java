@@ -167,7 +167,7 @@ public class Shelter {
 
 		for (String survivorString : survivorList) {
 			UUID uuid = UUID.fromString(survivorString);
-			teamList.add(survivorManager.getSurvivorByUUID(uuid));
+			teamList.add(survivorManager.getSurvivorByUniqueId(uuid));
 		}
 
 		return teamList;

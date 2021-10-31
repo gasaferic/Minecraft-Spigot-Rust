@@ -48,7 +48,7 @@ public class ShelterManager {
 
 	public void loadFromDatabase(UUID uuid) {
 		OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-		Survivor survivor = Main.getSurvivorManager().getSurvivorByOfflinePlayer(offlinePlayer);
+		Survivor survivor = Main.getSurvivorManager().getSurvivorByUniqueId(offlinePlayer.getUniqueId());
 		if (mySQL.hasShelter(survivor)) {
 			Shelter shelter = new Shelter(survivor, mySQL.getShelterConsoleBlock(survivor), mySQL.getFloor(survivor), mySQL.hasBunker(survivor), mySQL.getProtections(survivor), mySQL.getTeamers(survivor));
 			Main.getPlayersRegionManager().registerFromShelter(shelter);

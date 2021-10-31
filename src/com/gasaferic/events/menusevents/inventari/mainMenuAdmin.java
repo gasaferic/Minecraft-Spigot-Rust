@@ -25,7 +25,7 @@ public class mainMenuAdmin {
 
 		Inventory menucasa = Bukkit.createInventory(player, 27, "§7§lMenu Casa " + playercasa.getName());
 
-		Survivor survivor = survivorManager.getSurvivorByOfflinePlayer(playercasa);
+		Survivor survivor = survivorManager.getSurvivorByUniqueId(playercasa.getUniqueId());
 		Shelter playerShelter = shelterManager.getShelter(survivor);
 
 		if (playerShelter != null) {

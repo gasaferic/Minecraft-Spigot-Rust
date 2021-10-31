@@ -28,9 +28,7 @@ public class DoorPlaceEvents implements Listener {
 						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.DIRT
 						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.STONE)) {
 					if (e.getBlockPlaced().getType() == Material.IRON_DOOR_BLOCK) {
-						Block b = e.getBlockPlaced().getRelative(BlockFace.UP);
 						Main.getMetadataManager().saveDoor(e.getBlock(), e.getPlayer());
-						Main.getMetadataManager().saveDoor(b, e.getPlayer());
 					}
 				}
 			} else if (!area.isAreaOwner(player)) {
@@ -49,9 +47,7 @@ public class DoorPlaceEvents implements Listener {
 		if (e.getBlock().getRelative(BlockFace.UP).getType() == Material.IRON_DOOR_BLOCK) {
 			if (e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock()))
 					|| e.getPlayer().hasPermission("rust.doorbreakbypass")) {
-				Block b = e.getBlock().getRelative(BlockFace.UP);
 				Main.getMetadataManager().removeDoor(e.getBlock(), e.getPlayer());
-				Main.getMetadataManager().removeDoor(b, e.getPlayer());
 			} else if (!(e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock())))) {
 				e.setCancelled(true);
 			}
@@ -59,7 +55,6 @@ public class DoorPlaceEvents implements Listener {
 			if (e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock()))
 					|| e.getPlayer().hasPermission("rust.doorbreakbypass")) {
 				Block b = e.getBlock().getRelative(BlockFace.DOWN);
-				Main.getMetadataManager().removeDoor(e.getBlock(), e.getPlayer());
 				Main.getMetadataManager().removeDoor(b, e.getPlayer());
 			} else if (!(e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock())))) {
 				e.setCancelled(true);
@@ -78,9 +73,7 @@ public class DoorPlaceEvents implements Listener {
 						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.DIRT
 						|| e.getBlock().getRelative(BlockFace.DOWN).getType() != Material.STONE)) {
 					if (e.getBlockPlaced().getType() == Material.WOODEN_DOOR) {
-						Block b = e.getBlockPlaced().getRelative(BlockFace.UP);
 						Main.getMetadataManager().saveDoor(e.getBlock(), e.getPlayer());
-						Main.getMetadataManager().saveDoor(b, e.getPlayer());
 					}
 				}
 			} else if (!area.isAreaOwner(player)) {
@@ -99,9 +92,7 @@ public class DoorPlaceEvents implements Listener {
 		if (e.getBlock().getRelative(BlockFace.UP).getType() == Material.WOODEN_DOOR) {
 			if (e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock()))
 					|| e.getPlayer().hasPermission("rust.doorbreakbypass")) {
-				Block b = e.getBlock().getRelative(BlockFace.UP);
 				Main.getMetadataManager().removeDoor(e.getBlock(), e.getPlayer());
-				Main.getMetadataManager().removeDoor(b, e.getPlayer());
 			} else if (!(e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock())))) {
 				e.setCancelled(true);
 			}
@@ -109,7 +100,6 @@ public class DoorPlaceEvents implements Listener {
 			if (e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock()))
 					|| e.getPlayer().hasPermission("rust.doorbreakbypass")) {
 				Block b = e.getBlock().getRelative(BlockFace.DOWN);
-				Main.getMetadataManager().removeDoor(e.getBlock(), e.getPlayer());
 				Main.getMetadataManager().removeDoor(b, e.getPlayer());
 			} else if (!(e.getPlayer().getUniqueId().equals(Main.getMetadataManager().getBlockOwner(e.getBlock())))) {
 				e.setCancelled(true);

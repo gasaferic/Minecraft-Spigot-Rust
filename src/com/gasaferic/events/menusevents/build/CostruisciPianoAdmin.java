@@ -38,7 +38,7 @@ public class CostruisciPianoAdmin implements Listener {
 
 				OfflinePlayer shelterOwner = Bukkit.getServer()
 						.getOfflinePlayer(event.getInventory().getTitle().substring(14));
-				Survivor offlineSurvivor = survivorManager.getSurvivorByOfflinePlayer(shelterOwner);
+				Survivor offlineSurvivor = survivorManager.getSurvivorByUniqueId(shelterOwner.getUniqueId());
 
 				FloorMethod.buildFloor(shelterManager.getShelter(offlineSurvivor), survivor, Floor.SECOND, false);
 
@@ -48,7 +48,7 @@ public class CostruisciPianoAdmin implements Listener {
 
 				OfflinePlayer shelterOwner = Bukkit.getServer()
 						.getOfflinePlayer(event.getInventory().getTitle().substring(14));
-				Survivor offlineSurvivor = survivorManager.getSurvivorByOfflinePlayer(shelterOwner);
+				Survivor offlineSurvivor = survivorManager.getSurvivorByUniqueId(shelterOwner.getUniqueId());
 
 				FloorMethod.buildFloor(shelterManager.getShelter(offlineSurvivor), survivor, Floor.THIRD, false);
 
@@ -58,7 +58,7 @@ public class CostruisciPianoAdmin implements Listener {
 
 				OfflinePlayer shelterOwner = Bukkit.getServer()
 						.getOfflinePlayer(event.getInventory().getTitle().substring(14));
-				Survivor offlineSurvivor = survivorManager.getSurvivorByOfflinePlayer(shelterOwner);
+				Survivor offlineSurvivor = survivorManager.getSurvivorByUniqueId(shelterOwner.getUniqueId());
 
 				FloorMethod.buildFloor(shelterManager.getShelter(offlineSurvivor), survivor, Floor.FOURTH, false);
 
@@ -68,7 +68,7 @@ public class CostruisciPianoAdmin implements Listener {
 
 				OfflinePlayer shelterOwner = Bukkit.getServer()
 						.getOfflinePlayer(event.getInventory().getTitle().substring(14));
-				Survivor offlineSurvivor = survivorManager.getSurvivorByOfflinePlayer(shelterOwner);
+				Survivor offlineSurvivor = survivorManager.getSurvivorByUniqueId(shelterOwner.getUniqueId());
 
 				FloorMethod.buildFloor(shelterManager.getShelter(offlineSurvivor), survivor, Floor.FIFTH, false);
 
@@ -84,7 +84,7 @@ public class CostruisciPianoAdmin implements Listener {
 
 				OfflinePlayer shelterOwner = Bukkit.getServer()
 						.getOfflinePlayer(event.getInventory().getTitle().substring(14));
-				Survivor offlineSurvivor = survivorManager.getSurvivorByOfflinePlayer(shelterOwner);
+				Survivor offlineSurvivor = survivorManager.getSurvivorByUniqueId(shelterOwner.getUniqueId());
 
 				FloorMethod.buildBunker(shelterManager.getShelter(offlineSurvivor), survivor, Floor.BUNKER, false);
 

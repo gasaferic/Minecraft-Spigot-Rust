@@ -45,7 +45,7 @@ public class RimuoviRifugio implements Listener {
 						OfflinePlayer offlinePlayer = Bukkit.getServer()
 								.getOfflinePlayer(event.getInventory().getTitle().substring(13));
 
-						Survivor survivor = survivorManager.getSurvivorByOfflinePlayer(offlinePlayer);
+						Survivor survivor = survivorManager.getSurvivorByUniqueId(offlinePlayer.getUniqueId());
 						Shelter playerShelter = shelterManager.getShelter(survivor);
 						
 						areaManager.unregisterArea(areaManager.getAreaFromName("Casa" + player.getName()));

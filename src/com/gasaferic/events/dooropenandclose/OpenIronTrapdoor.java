@@ -42,7 +42,7 @@ public class OpenIronTrapdoor implements Listener {
 					if (b.getType() == Material.IRON_TRAPDOOR) {
 
 						Team team = shelterManager.getShelter(
-								survivorManager.getSurvivorByUUID(metadataManager.getBlockOwner(e.getClickedBlock())))
+								survivorManager.getSurvivorByUniqueId(metadataManager.getBlockOwner(e.getClickedBlock())))
 								.getTeam();
 
 						BlockState state = b.getState();

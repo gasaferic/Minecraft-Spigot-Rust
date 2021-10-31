@@ -38,7 +38,7 @@ public class OpenWoodTrapdoor implements Listener {
 					if (b.getType() == Material.TRAP_DOOR) {
 
 						Team team = shelterManager.getShelter(
-								survivorManager.getSurvivorByUUID(metadataManager.getBlockOwner(e.getClickedBlock())))
+								survivorManager.getSurvivorByUniqueId(metadataManager.getBlockOwner(e.getClickedBlock())))
 								.getTeam();
 
 						if ((team.getTeamMembers().contains(survivor)

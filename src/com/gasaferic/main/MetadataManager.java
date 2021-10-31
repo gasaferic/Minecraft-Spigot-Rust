@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
@@ -46,7 +47,8 @@ public class MetadataManager {
 	}
 
 	public void saveDoor(Block block, Player player) {
-		setBlockOwner(block, player.getUniqueId());
+ 		setBlockOwner(block, player.getUniqueId());
+ 		setBlockOwner(block.getRelative(BlockFace.UP), player.getUniqueId());
 		shelterManager.getShelter(survivorManager.getSurvivorByPlayer(player)).addDoor(block);
 	}
 
@@ -68,23 +70,25 @@ public class MetadataManager {
 	}
 
 	public void removeBarriera(Block block, UUID uuid) {
-		if (shelterManager.getShelter(survivorManager.getSurvivorByUUID(uuid)).getBarriers().contains(block)) {
+		if (shelterManager.getShelter(survivorManager.getSurvivorByUniqueId(uuid)).getBarriers().contains(block)) {
 			removeBlockOwner(block);
-			shelterManager.getShelter(survivorManager.getSurvivorByUUID(uuid)).removeBarrier(block);
+			shelterManager.getShelter(survivorManager.getSurvivorByUniqueId(uuid)).removeBarrier(block);
 		}
 	}
 
 	public void removeDoor(Block block, Player player) {
 		if (shelterManager.getShelter(survivorManager.getSurvivorByPlayer(player)).getDoors().contains(block)) {
 			removeBlockOwner(block);
+			removeBlockOwner(block.getRelative(BlockFace.UP));
 			shelterManager.getShelter(survivorManager.getSurvivorByPlayer(player)).removeDoor(block);
 		}
 	}
 
 	public void removeDoor(Block block, UUID uuid) {
-		if (shelterManager.getShelter(survivorManager.getSurvivorByUUID(uuid)).getDoors().contains(block)) {
+		if (shelterManager.getShelter(survivorManager.getSurvivorByUniqueId(uuid)).getDoors().contains(block)) {
 			removeBlockOwner(block);
-			shelterManager.getShelter(survivorManager.getSurvivorByUUID(uuid)).removeDoor(block);
+			removeBlockOwner(block.getRelative(BlockFace.UP));
+			shelterManager.getShelter(survivorManager.getSurvivorByUniqueId(uuid)).removeDoor(block);
 		}
 	}
 
@@ -96,9 +100,9 @@ public class MetadataManager {
 	}
 
 	public void removeTrapdoor(Block block, UUID uuid) {
-		if (shelterManager.getShelter(survivorManager.getSurvivorByUUID(uuid)).getTrapdoors().contains(block)) {
+		if (shelterManager.getShelter(survivorManager.getSurvivorByUniqueId(uuid)).getTrapdoors().contains(block)) {
 			removeBlockOwner(block);
-			shelterManager.getShelter(survivorManager.getSurvivorByUUID(uuid)).removeTrapdoor(block);
+			shelterManager.getShelter(survivorManager.getSurvivorByUniqueId(uuid)).removeTrapdoor(block);
 		}
 	}
 

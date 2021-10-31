@@ -187,8 +187,8 @@ public class Main extends JavaPlugin implements Listener {
 			registerEvents();
 			registerCommands();
 
-			registerOnlineSurvivors();
 			registerOfflineSurvivors();
+			registerOnlineSurvivors();
 			registerShelters();
 
 			PluginManager pm = getServer().getPluginManager();

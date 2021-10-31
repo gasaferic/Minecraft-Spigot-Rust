@@ -41,7 +41,7 @@ public class OpenWoodDoor implements Listener {
 
 							Team team = shelterManager
 									.getShelter(survivorManager
-											.getSurvivorByUUID(metadataManager.getBlockOwner(e.getClickedBlock())))
+											.getSurvivorByUniqueId(metadataManager.getBlockOwner(e.getClickedBlock())))
 									.getTeam();
 							
 							if ((team.getTeamMembers().contains(survivor)
@@ -77,7 +77,7 @@ public class OpenWoodDoor implements Listener {
 
 							Team team = shelterManager
 									.getShelter(survivorManager
-											.getSurvivorByUUID(metadataManager.getBlockOwner(e.getClickedBlock())))
+											.getSurvivorByUniqueId(metadataManager.getBlockOwner(e.getClickedBlock())))
 									.getTeam();
 							
 							if ((team.getTeamMembers().contains(survivor)

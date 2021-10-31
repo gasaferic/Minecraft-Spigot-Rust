@@ -37,7 +37,7 @@ public class RimuoviPlayerEvent implements Listener {
 					String targetname = clicked.getItemMeta().getDisplayName().substring(2);
 
 					Survivor clickedSurvivor = survivorManager
-							.getSurvivorByOfflinePlayer(Bukkit.getPlayerExact(targetname));
+							.getSurvivorByUniqueId(Bukkit.getPlayerExact(targetname).getUniqueId());
 
 					Team team = shelterManager.getShelter(survivor).getTeam();
 

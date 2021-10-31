@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.UUID;
 
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import com.gasaferic.model.Survivor;
@@ -37,19 +36,6 @@ public class SurvivorManager {
 		return survivorsList;
 	}
 
-	public Survivor getSurvivorByOfflinePlayer(OfflinePlayer offlinePlayer) {
-		Survivor targetSurvivor = null;
-
-		for (Survivor currentSurvivor : survivors) {
-			if (currentSurvivor.getOfflinePlayer().equals(offlinePlayer)) {
-				targetSurvivor = currentSurvivor;
-				break;
-			}
-		}
-
-		return targetSurvivor;
-	}
-
 	public Survivor getSurvivorByPlayer(Player player) {
 		Survivor targetSurvivor = null;
 
@@ -63,7 +49,7 @@ public class SurvivorManager {
 		return targetSurvivor;
 	}
 
-	public Survivor getSurvivorByUUID(UUID uuid) {
+	public Survivor getSurvivorByUniqueId(UUID uuid) {
 		Survivor targetSurvivor = null;
 
 		for (Survivor currentSurvivor : survivors) {
@@ -79,17 +65,17 @@ public class SurvivorManager {
 	public boolean survivorAlreadyExists(Survivor survivor) {
 		boolean alreadyExists = false;
 		
-		if (getSurvivorByOfflinePlayer(survivor.getOfflinePlayer()) != null) {
+		if (getSurvivorByUniqueId(survivor.getUniqueId()) != null) {
 			alreadyExists = true;
 		}
 		
 		return alreadyExists;
 	}
 
-	public boolean survivorAlreadyExists(OfflinePlayer offlinePlayer) {
+	public boolean survivorAlreadyExists(UUID uniqueId) {
 		boolean alreadyExists = false;
-		
-		if (getSurvivorByOfflinePlayer(offlinePlayer) != null) {
+				
+		if (getSurvivorByUniqueId(uniqueId) != null) {
 			alreadyExists = true;
 		}
 		
