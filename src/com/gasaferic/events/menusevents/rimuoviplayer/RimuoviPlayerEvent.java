@@ -1,7 +1,10 @@
 package com.gasaferic.events.menusevents.rimuoviplayer;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,9 +38,9 @@ public class RimuoviPlayerEvent implements Listener {
 			if ((clicked.getType() == Material.SKULL) || (clicked.getDurability() == 3)) {
 				if (clicked.getAmount() != 0) {
 					String targetname = clicked.getItemMeta().getDisplayName().substring(2);
-
+					
 					Survivor clickedSurvivor = survivorManager
-							.getSurvivorByUniqueId(Bukkit.getPlayerExact(targetname).getUniqueId());
+							.getSurvivorByUniqueId(UUID.fromString(CraftItemStack.asNMSCopy(clicked).getTag().getString("survivorUniqueId")));
 
 					Team team = shelterManager.getShelter(survivor).getTeam();
 

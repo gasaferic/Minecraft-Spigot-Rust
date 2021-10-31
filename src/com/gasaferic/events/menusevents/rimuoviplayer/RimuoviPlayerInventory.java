@@ -2,6 +2,7 @@ package com.gasaferic.events.menusevents.rimuoviplayer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +13,8 @@ import com.gasaferic.managers.ShelterManager;
 import com.gasaferic.managers.SurvivorManager;
 import com.gasaferic.model.Survivor;
 import com.gasaferic.model.Team;
+
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 
 public class RimuoviPlayerInventory {
 
@@ -34,7 +37,16 @@ public class RimuoviPlayerInventory {
 
 		for (Survivor selectedSurvivor : team.getTeamMembers()) {
 			ItemStack selectedSurvivorHead = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+			
+			net.minecraft.server.v1_8_R3.ItemStack nmsHead = CraftItemStack.asNMSCopy(selectedSurvivorHead);
+			NBTTagCompound headCompound = (nmsHead.hasTag()) ? nmsHead.getTag() : new NBTTagCompound();
+			headCompound.setString("survivorUniqueId", selectedSurvivor.getUniqueId().toString());
+			nmsHead.setTag(headCompound);
+			selectedSurvivorHead = CraftItemStack.asBukkitCopy(nmsHead);
+			
 			SkullMeta selectedSurvivorHeadMeta = (SkullMeta) selectedSurvivorHead.getItemMeta();
+			
+			
 			selectedSurvivorHeadMeta.setOwner(selectedSurvivor.getName());
 			selectedSurvivorHeadMeta.setDisplayName("§f" + selectedSurvivor.getName());
 			selectedSurvivorHead.setItemMeta(selectedSurvivorHeadMeta);

@@ -25,7 +25,7 @@ public class PlayersRegionManager {
 		areaFlags.addAreaFlag(new AreaFlag(AreaFlagTypes.BUILD, false));
 		areaFlags.addAreaFlag(new AreaFlag(AreaFlagTypes.BREAK, false));
 		
-		Main.getAreaManager().registerArea(areaProtectionAPI.createNewArea("Casa" + survivor.getName(), survivor.getPlayer(), selection, location, false, areaFlags, true));
+		Main.getAreaManager().registerArea(areaProtectionAPI.createNewArea("Casa" + survivor.getName(), survivor.getUniqueId(), selection, location, false, areaFlags, true));
 		
 	}
 	
@@ -43,7 +43,7 @@ public class PlayersRegionManager {
 		areaFlags.addAreaFlag(new AreaFlag(AreaFlagTypes.BUILD, false));
 		areaFlags.addAreaFlag(new AreaFlag(AreaFlagTypes.BREAK, false));
 
-		Main.getAreaManager().registerArea(areaProtectionAPI.createNewArea("Casa" + survivor.getName(), survivor.getPlayer(), selection, location, false, areaFlags, true));
+		Main.getAreaManager().registerArea(areaProtectionAPI.createNewArea("Casa" + survivor.getName(), survivor.getUniqueId(), selection, location, false, areaFlags, true));
 
 		
 	}

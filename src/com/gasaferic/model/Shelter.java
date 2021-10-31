@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 
 import com.gasaferic.main.Main;
 import com.gasaferic.main.MetadataManager;
@@ -95,6 +96,7 @@ public class Shelter {
 				Block door = location.getBlock();
 				doors.add(door);
 				metadataManager.setBlockOwner(door, shelterOwner.getUniqueId());
+				metadataManager.setBlockOwner(door.getRelative(BlockFace.UP), shelterOwner.getUniqueId());
 			}
 		}
 	}
