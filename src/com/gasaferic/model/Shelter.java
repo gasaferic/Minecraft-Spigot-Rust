@@ -128,7 +128,6 @@ public class Shelter {
 
 	public void removeDoor(Block door) {
 		if (this.doors.contains(door)) {
-			System.out.println("IN DOORS");
 			this.doors.remove(door);
 			this.doorsToRemove.add(door);
 		}
